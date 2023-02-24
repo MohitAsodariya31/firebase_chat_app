@@ -171,14 +171,20 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   sendMessage() async {
-    await users!.add({
-      'text': message.text,
-      'sender_id': userData['user_id'],
-      'receive_id': widget.data!['user_id'],
-      'time': FieldValue.serverTimestamp(),
-    }).then((value) {
-      message.clear();
-      debugPrint("Message Send");
-    }).catchError((error) => debugPrint("Failed to send message: $error"));
+    await users!.add(
+      {
+        'text': message.text,
+        'sender_id': userData['user_id'],
+        'receive_id': widget.data!['user_id'],
+        'time': FieldValue.serverTimestamp(),
+      },
+    ).then(
+      (value) {
+        message.clear();
+        debugPrint("Message Send");
+      },
+    ).catchError(
+      (error) => debugPrint("Failed to send message: $error"),
+    );
   }
 }
